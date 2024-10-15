@@ -14,7 +14,7 @@ import com.bootcamp.demo_post.exception.JPHRestClientException;
 import com.bootcamp.demo_post.mapper.JPHCommentMapper;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
-import com.bootcamp.demo_post.model.user;
+import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.model.UserPostCommentDTO;
 import com.bootcamp.demo_post.service.JPHCommentService;
 // import com.bootcamp.demo_post.userRepository.UserRepository;
@@ -64,7 +64,7 @@ public class JPHCommentServiceImpl implements JPHCommentService {
   //}
 
   @Override
-  public List<user> getUser() {
+  public List<User> getUser() {
     String url = Url.builder()
         .scheme(Scheme.HTTPS)
         .domain(this.jphDomain)
@@ -72,9 +72,9 @@ public class JPHCommentServiceImpl implements JPHCommentService {
         .build()
         .toUriString();
     System.out.println("url=" + url);
-    user[] users;
+    User[] users;
     try {
-      users = this.restTemplate.getForObject(url, user[].class);
+      users = this.restTemplate.getForObject(url, User[].class);
     } catch (RestClientException e) {
       throw new JPHRestClientException("joson Placeholder exception.");
     }
@@ -117,7 +117,7 @@ public class JPHCommentServiceImpl implements JPHCommentService {
     return List.of(comments);
   }
 
-  getUserPostCommentDTO 
+  // getUserPostCommentDTO 
 
 
 }

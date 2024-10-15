@@ -3,13 +3,11 @@ package com.bootcamp.demo_post.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
-import com.bootcamp.demo_post.model.UserDTO;
-import com.bootcamp.demo_post.model.UserPostCommentDTO;
+import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.service.JPHCommentService;
 
 @RestController
@@ -20,7 +18,7 @@ private JPHCommentService jphCommentService;
 
 
 @Override
-public  List<UserDTO> getUser(){
+public  List<User> getUser(){
     return this.jphCommentService.getUser();
 }
 
