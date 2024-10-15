@@ -1,0 +1,19 @@
+
+# server: 
+#   port: 8081    #code require, must have 2 space at the front
+
+# api: Unknow property 'api'
+#   domain: rt.data.gov.hk
+#   version: v1
+#   pathA: transport
+#   pathB: mtr
+#   patchC: getSchedule.php
+
+
+# #   https://
+# #   rt.data.gov.hk
+# #   v1
+# #   transport
+# #   mtr
+# #   getSchedule.php
+# #   ?line=${line}&sta=${station}
