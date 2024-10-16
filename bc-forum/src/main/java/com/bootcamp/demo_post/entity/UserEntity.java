@@ -25,11 +25,12 @@ public class UserEntity  implements Serializable{
  @Id
  @GeneratedValue (strategy = GenerationType.IDENTITY)
 
-  private int id;
+  private Integer id;
   private String name;
   private String username;
   private String phone;
   private String website;
+  private String email;
   @Column(name = "address_street")
   private String addrStreet;
   @Column(name = "address_suite")

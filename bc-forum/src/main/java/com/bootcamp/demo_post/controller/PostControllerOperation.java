@@ -10,8 +10,6 @@ import com.bootcamp.demo_post.model.User;
 
 public interface PostControllerOperation {
 
-  // @GetMapping("/jph/userspost")
-  // List<UserPostCommentDTO> getUserPostComment();
 
 
   @GetMapping("/jph/users")

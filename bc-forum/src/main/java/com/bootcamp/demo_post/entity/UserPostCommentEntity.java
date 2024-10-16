@@ -28,7 +28,7 @@ import lombok.Setter;
 public class UserPostCommentEntity  implements Serializable{
  @Id
  @GeneratedValue (strategy = GenerationType.IDENTITY)
-  private int id;
+  private Integer id;
   private String name;
   private String username;
   private String phone;
@@ -51,10 +51,9 @@ public class UserPostCommentEntity  implements Serializable{
   private String comCatchPhrase;
   @Column(name = "company_bs")
   private String comBs;
-  @Column(name = "post_title")
-  private String title;
-  @Column(name = "comment")
-  private String body;
+
+
+
 }
 
 

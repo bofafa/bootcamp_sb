@@ -1,71 +1,76 @@
 package com.bootcamp.demo_post.model;
 
-import lombok.AllArgsConstructor;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-public class UserPostCommentDTO{
+@Data
+@Builder
+@Setter
+public class UserPostCommentDTO {
+  private Integer id;
+  private String name;
+  private String username;
+  String email;
+  AddressDTO address;
+  String phone;
+  String website;
+  CompanyDTO company;
 
-    private int id;
+  @Builder.Default
+  List<PostDTO> postDTO = new ArrayList<>();
+
+  @Getter
+  @Builder
+  @ToString
+  public static class AddressDTO {
+    private String street;
+    private String suite;
+    private String city;
+    private String zipcode;
+    private GeoDTO geo;
+
+    @Getter
+    @Builder
+    @ToString
+    public static class GeoDTO {
+      private String lat;
+      private String lng;
+    }
+  }
+
+  @Getter
+  @Builder
+  @ToString
+  public static class CompanyDTO {
     private String name;
-    private String username;
-    private Address address;
-    private String phone;
-    private String website;
-    private Company company;
+    private String catchPhrase;
+    private String bs;
+  }
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    public static class Address {
-      private String street;
-      private String suite;
-      private String city;
-      private String zipcode;
-      private Geo geo;
-
-      @AllArgsConstructor
-@NoArgsConstructor
-@Getter
-      public static class Geo {
-        private String lat;
-        private String lng;
-      }
-    }
-
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-    public static class Company {
-      private String name;
-      private String catchPhrase;
-      private String bs;
-    }
-  
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-  public static class PostDTO { 
-    private int userId;
-    private int id;
+  @Data
+  @Builder
+  public static class PostDTO {
+    private Integer id;
     private String title;
     private String body;
- 
 
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Getter
-  public static class CommentDTO { 
-    private int postId;
-    private int id;
+    @Builder.Default
+    private List<CommentDTO> commentDTO = new ArrayList<>();
+
+  }
+
+  @Data
+  @Builder
+  public static class CommentDTO {
+    private Integer id;
     private String name;
     private String email;
     private String body;
-  }
+
   }
 }
-
-            

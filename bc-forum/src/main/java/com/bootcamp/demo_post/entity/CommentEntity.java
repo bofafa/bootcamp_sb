@@ -25,8 +25,8 @@ import lombok.Setter;
 public class CommentEntity  implements Serializable {
   @Id
  @GeneratedValue (strategy = GenerationType.IDENTITY)
-  private int postId;
-  private int id;
+  private Integer postId;
+  private Integer id;
   private String name;
   private String email;
    @Column(name = "comment")

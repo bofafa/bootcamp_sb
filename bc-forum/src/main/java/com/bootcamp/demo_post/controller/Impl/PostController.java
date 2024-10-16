@@ -1,10 +1,11 @@
-package com.bootcamp.demo_post.controller;
+package com.bootcamp.demo_post.controller.Impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bootcamp.demo_post.controller.PostControllerOperation;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
