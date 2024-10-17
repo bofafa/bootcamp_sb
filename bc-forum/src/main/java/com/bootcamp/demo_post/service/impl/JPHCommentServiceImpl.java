@@ -6,10 +6,12 @@ import org.hibernate.annotations.DialectOverride.OverridesAnnotation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import com.bootcamp.demo_post.exception.ErrorCode;
 import com.bootcamp.demo_post.exception.JPHRestClientException;
 import com.bootcamp.demo_post.mapper.JPHCommentMapper;
 import com.bootcamp.demo_post.model.Comment;
@@ -61,7 +63,7 @@ public class JPHCommentServiceImpl implements JPHCommentService {
   // throw new JPHRestClientException("joson Placeholder exception.");
   // }
   // return List.of(userPostComment);
-  //}
+  // }
 
   @Override
   public List<User> getUser() {
@@ -107,17 +109,13 @@ public class JPHCommentServiceImpl implements JPHCommentService {
         .endpoint(this.commentsEndpoint)
         .build()
         .toUriString();
-    System.out.println("url=" + url);
     Comment[] comments;
-    try {
-      comments = this.restTemplate.getForObject(url, Comment[].class);
-    } catch (RestClientException e) {
-      throw new JPHRestClientException("joson Placeholder exception.");
-    }
+    comments = this.restTemplate.getForObject(url, Comment[].class);
+    if (!ResponseEntity.ofNullable(comments).getStatusCode().is2xxSuccessful())
+      throw new JPHRestClientException(ErrorCode.RESST_TEMPLAT_ERROR.getMessage());
     return List.of(comments);
   }
 
-  // getUserPostCommentDTO 
-
+  // getUserPostCommentDTO
 
 }

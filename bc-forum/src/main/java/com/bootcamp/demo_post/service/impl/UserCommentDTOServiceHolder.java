@@ -10,6 +10,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import com.bootcamp.demo_post.exception.ErrorCode;
+import com.bootcamp.demo_post.exception.InvalidInputException;
+import com.bootcamp.demo_post.exception.RestTemplateException;
+import com.bootcamp.demo_post.exception.UserNotFoundException;
 import com.bootcamp.demo_post.mapper.UserCommentMapper;
 import com.bootcamp.demo_post.mapper.UserPostCommentMapper;
 import com.bootcamp.demo_post.model.UserCommentDTO;
@@ -59,7 +63,7 @@ public class UserCommentDTOServiceHolder implements UserCommentDTOService {
     UserPostCommentDTO targetUser = allList.stream()
         .filter(user -> convertUserID.equals(user.getId()))
         .findFirst()
-        .orElseThrow(() -> new RuntimeException("User not found"));
+        .orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND));
     
     // Collect all comments from all posts using stream
     List<UserCommentDTO.CommentDTO> insideList = targetUser.getPostDTO().stream()
@@ -73,8 +77,14 @@ public class UserCommentDTOServiceHolder implements UserCommentDTOService {
     result.setCommentDTOs(insideList);
     
     return result;
+
 }
 
+
+
+
+// [[1,2,3],[4,5,6]] -> map -> [[1,2,3,4,5,6]]
+// [[1,2,3],[4,5,6]] -> flatmap -> [1,2,3,4,5,6]
 
 
     // List<UserCommentDTO.CommentDTO> insideList = new ArrayList<>();
@@ -94,8 +104,8 @@ public class UserCommentDTOServiceHolder implements UserCommentDTOService {
 //       insideList = targetUser.getPostDTO().get(i).getCommentDTO().stream()//
 //           .map(comment -> userPostCommentMapper.map(comment))//
 //           .collect(Collectors.toList());
-// // [[1,2,3],[4,5,6]] -> map -> [[1,2,3,4,5,6]]
-// // [[1,2,3],[4,5,6]] -> flatmap -> [1,2,3,4,5,6]
+// [[1,2,3],[4,5,6]] -> map -> [[1,2,3,4,5,6]]
+// [[1,2,3],[4,5,6]] -> flatmap -> [1,2,3,4,5,6]
 
 //     }
     // targetUser.getPostDTO().forEach(post -> {

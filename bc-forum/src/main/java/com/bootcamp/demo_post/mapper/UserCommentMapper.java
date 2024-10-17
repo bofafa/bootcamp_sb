@@ -20,7 +20,7 @@ public class UserCommentMapper {
 
 public UserCommentDTO.CommentDTO mapTODTO(Comment comment){
     return UserCommentDTO.CommentDTO.builder()//
-      .id(comment.getId())//
+     // .id(comment.getId())//
       .name(comment.getName())//
       .email(comment.getEmail())//
       .body(comment.getBody())//
