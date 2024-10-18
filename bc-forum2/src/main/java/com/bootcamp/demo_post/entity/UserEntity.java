@@ -42,4 +42,8 @@ public class UserEntity implements Serializable {
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private AddressEntity address;
 
+  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private CompanyEntity company;
+
+
 }

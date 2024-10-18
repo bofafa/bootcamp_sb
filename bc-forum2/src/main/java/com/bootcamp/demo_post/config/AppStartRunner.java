@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
 import com.bootcamp.demo_post.entity.CommentEntity;
+import com.bootcamp.demo_post.entity.CompanyEntity;
 import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.entity.PostEntity;
 import com.bootcamp.demo_post.entity.UserEntity;
@@ -42,7 +43,7 @@ public class AppStartRunner implements CommandLineRunner {
     List<Comment> comments = this.jphCommentService.getComment();
     List<User> users = this.jphCommentService.getUser();
     List<AddressEntity> addressEntitys = this.jphCommentService.getAddressEntity();
-    // List<CompanyDTO> companyDTOs = this.jphCommentService.getCompanyDTO();
+    List<CompanyEntity> companyEntitys = this.jphCommentService.getCompanyEntity();
     List<GeoEntity> geoEntitys = this.jphCommentService.getGeoEntity();
 
     List<UserEntity> userEntities = users.stream().map(uDto -> {
@@ -93,18 +94,30 @@ public class AppStartRunner implements CommandLineRunner {
       });
     });
     userService.saveAlladdress(addressEntitys);
-
     geoEntitys.forEach(geo -> {
       addressEntitys.forEach(address -> {
         if (geo.getId().equals(address.getId())) {
-           geo.setAddress(address);
+          geo.setAddress(address);
         }
 
       });
     });
 
-    userService.saveAlladdress(addressEntitys);
+
+    companyEntitys.forEach(company -> {
+      userEntities.forEach(user -> {
+        if (company.getId().equals(user.getId())) {
+          company.setUser(user); // Enitiy for map by
+        }
+
+      });
+    });
+
+    userService.saveAllcompany(companyEntitys);
+
     userService.saveAllGeos(geoEntitys);
-    
+
+    userService.saveAlladdress(addressEntitys);
+
   }
 }

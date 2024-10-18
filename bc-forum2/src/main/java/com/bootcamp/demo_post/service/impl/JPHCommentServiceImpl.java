@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.CompanyEntity;
 import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.exception.ErrorCode;
 import com.bootcamp.demo_post.exception.JPHRestClientException;
@@ -133,6 +134,22 @@ public class JPHCommentServiceImpl implements JPHCommentService {
     })//
         .collect(Collectors.toList());
   }
+
+
+  @Override
+  public List<CompanyEntity> getCompanyEntity() {
+    return getUser().stream().map(user -> {
+      CompanyEntity companyEntity = CompanyEntity.builder()//
+          .id(user.getId())//
+          .name(user.getCompany().getName())//
+          .catchPhrase(user.getCompany().getCatchPhrase())//
+          .bs(user.getCompany().getBs())
+          .build();
+      return companyEntity;
+    })//
+        .collect(Collectors.toList());
+  }
+
 
   @Override
   public List<GeoEntity> getGeoEntity() {
