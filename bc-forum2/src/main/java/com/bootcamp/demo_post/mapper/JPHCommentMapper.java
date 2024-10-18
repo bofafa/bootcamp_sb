@@ -14,33 +14,12 @@ import com.bootcamp.demo_post.model.UserPostCommentDTO;
 @Component
 public class JPHCommentMapper {
 
-  // public UserPostCommentEntity map(UserPostCommentDTO userPostCommentDTO) {
-
-  //   return UserPostCommentEntity.builder()
-  //       .id( userPostCommentDTO.getuser().getId())
-  //       .name(userPostCommentDTO.getuser().getName())
-  //       .username(userPostCommentDTO.getuser().getUsername())//
-  //       .title(userPostCommentDTO.getPostDTO().getTitle())
-  //       .body(userPostCommentDTO.getPostDTO().getBody())
-  //       .body(userPostCommentDTO.getCommentDTO().getBody())
-  //       .build();
-  // }
-  
 
    public UserEntity map(User user) {
     return UserEntity.builder() //
         .id(user.getId())
         .name(user.getName())
         .username(user.getUsername())
-        // .addrLat(user.getAddress().getGeo().getLat()) //
-        // .addrLng(user.getAddress().getGeo().getLng()) //
-        // .addrCity(user.getAddress().getCity()) //
-        // .addrStreet(user.getAddress().getStreet()) //
-        // .addrSuite(user.getAddress().getSuite()) //
-        // .addrZipcode(user.getAddress().getZipcode()) //
-        // .comBs(user.getCompany().getBs()) //
-        // .comCatchPhrase(user.getCompany().getCatchPhrase()) //
-        // .comName(user.getCompany().getName()) //
         .name(user.getName()) //
         .username(user.getUsername()) //
         .phone(user.getPhone()) //

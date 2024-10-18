@@ -1,8 +1,6 @@
-package com.bootcamp.demo_post.controller;
+package com.bootcamp.demo_post.config;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +9,15 @@ import org.springframework.stereotype.Component;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
 import com.bootcamp.demo_post.entity.CommentEntity;
+import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.entity.PostEntity;
 import com.bootcamp.demo_post.entity.UserEntity;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
-import com.bootcamp.demo_post.model.UserPostCommentDTO.AddressDTO;
-import com.bootcamp.demo_post.model.UserPostCommentDTO.CompanyDTO;
-import com.bootcamp.demo_post.model.UserPostCommentDTO.AddressDTO.GeoDTO;
 import com.bootcamp.demo_post.service.JPHCommentService;
 import com.bootcamp.demo_post.service.PostService;
 import com.bootcamp.demo_post.service.UserService;
-
-import jakarta.persistence.Column;
 
 // @Autowired(required = false)
 // private CommandLineRunner runner;
@@ -49,7 +43,7 @@ public class AppStartRunner implements CommandLineRunner {
     List<User> users = this.jphCommentService.getUser();
     List<AddressEntity> addressEntitys = this.jphCommentService.getAddressEntity();
     // List<CompanyDTO> companyDTOs = this.jphCommentService.getCompanyDTO();
-    // List<GeoDTO> geoDTOs = this.jphCommentService.getGeoDTO();
+    List<GeoEntity> geoEntitys = this.jphCommentService.getGeoEntity();
 
     List<UserEntity> userEntities = users.stream().map(uDto -> {
       UserEntity userEntity = UserEntity.builder()
@@ -89,16 +83,28 @@ public class AppStartRunner implements CommandLineRunner {
     postService.saveAll(postEntities);
     userService.saveAll(userEntities);
 
-    addressEntitys.forEach(address->{
-      userEntities.forEach(user->{
-        if(address.getId().equals(user.getId())){
-        //  user.setAddress(address);
-        address.setUser(user);
+    addressEntitys.forEach(address -> {
+      userEntities.forEach(user -> {
+        if (address.getId().equals(user.getId())) {
+          // user.setAddress(address);
+          address.setUser(user); // Enitiy for map by
         }
 
       });
     });
     userService.saveAlladdress(addressEntitys);
 
+    geoEntitys.forEach(geo -> {
+      addressEntitys.forEach(address -> {
+        if (geo.getId().equals(address.getId())) {
+           geo.setAddress(address);
+        }
+
+      });
+    });
+
+    userService.saveAlladdress(addressEntitys);
+    userService.saveAllGeos(geoEntitys);
+    
   }
 }

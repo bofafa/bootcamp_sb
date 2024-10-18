@@ -12,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.exception.ErrorCode;
 import com.bootcamp.demo_post.exception.JPHRestClientException;
 import com.bootcamp.demo_post.mapper.JPHCommentMapper;
@@ -126,21 +127,34 @@ public class JPHCommentServiceImpl implements JPHCommentService {
           .addrStreet(user.getAddress().getStreet())//
           .addrSuite(user.getAddress().getSuite())//
           .addrCity(user.getAddress().getCity())
+          .addrZipcode(user.getAddress().getZipcode())
           .build();
       return addressEntity;
     })//
         .collect(Collectors.toList());
   }
 
+  @Override
+  public List<GeoEntity> getGeoEntity() {
+    return getUser().stream().map(user -> {
+      GeoEntity geoEntity = GeoEntity.builder()//
+          .id(user.getId())
+          .lat(user.getAddress().getGeo().getLat())
+          .lng(user.getAddress().getGeo().getLng())
+          .build();
+      return geoEntity;
+    })//
+        .collect(Collectors.toList());
+  }
+
+ 
+
   // @Override
   // public List<CompanyDTO> getCompanyDTO() {
   //   return null;
   // }
 
-  // @Override
-  // public List<GeoDTO> getGeoDTO() {
-  //   return null;
-  // }
+
 
   // getUserPostCommentDTO
 

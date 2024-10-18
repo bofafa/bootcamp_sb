@@ -3,6 +3,7 @@ package com.bootcamp.demo_post.service;
 import java.util.List;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
@@ -20,7 +21,7 @@ List<Post> getPost();
 List<Comment> getComment();
 List<AddressEntity> getAddressEntity();
 // List<CompanyDTO> getCompanyDTO();
-// List<GeoDTO> getGeoDTO();
+ List<GeoEntity> getGeoEntity();
 
 
 }

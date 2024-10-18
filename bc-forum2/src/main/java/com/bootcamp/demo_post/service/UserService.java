@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.entity.UserEntity;
 
 @Service
@@ -16,4 +17,6 @@ public interface UserService {
 
     List<AddressEntity> saveAlladdress(List<AddressEntity> addressEntity);
 
+   List<GeoEntity> saveAllGeos(List<GeoEntity> geoEntities);
+  
 }

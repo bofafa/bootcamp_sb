@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.entity.UserEntity;
+
 import com.bootcamp.demo_post.service.UserService;
 import com.bootcamp.demo_post.userRepository.AddressRepository;
+import com.bootcamp.demo_post.userRepository.GeoRepository;
 import com.bootcamp.demo_post.userRepository.UserRepository;
 
 @Service
@@ -19,19 +22,29 @@ public class UserServiceImpl implements UserService {
   @Autowired
   private AddressRepository addressRepository;
 
-  @Override
-  public List<UserEntity> saveAll(List<UserEntity> userEntities) {
-    return userRepository.saveAll(userEntities);
-
-  }
+  @Autowired
+  private GeoRepository geoRepository;
 
   @Override
   public List<UserEntity> getAllDataFromDatabase() {
     return userRepository.findAll();
-  };
+  }
+
+  @Override
+  public List<UserEntity> saveAll(List<UserEntity> userEntities) {
+    return userRepository.saveAll(userEntities);
+ }
+
 
   @Override
   public List<AddressEntity> saveAlladdress(List<AddressEntity> addressEntity) {
     return addressRepository.saveAll(addressEntity);
+ }
+
+  @Override
+  public List<GeoEntity> saveAllGeos( List<GeoEntity> geoEntity) {
+    return geoRepository.saveAll(geoEntity);
   }
+
 }
+

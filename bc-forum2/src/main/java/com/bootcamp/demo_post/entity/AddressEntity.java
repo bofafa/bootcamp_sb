@@ -2,8 +2,10 @@ package com.bootcamp.demo_post.entity;
 
 import java.io.Serializable;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,7 +22,7 @@ import lombok.ToString;
 
 @Builder
 @Entity
-@Table(name = "address")
+@Table (name ="address")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,10 +30,9 @@ import lombok.ToString;
 @ToString
 public class AddressEntity implements Serializable {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @GeneratedValue (strategy = GenerationType.IDENTITY)
+  @Column(name = "address_id")
   private Integer id;
-
-  //private Integer userID;
   @Column(name = "address_street")
   private String addrStreet;
   @Column(name = "address_suite")
@@ -40,12 +41,15 @@ public class AddressEntity implements Serializable {
   private String addrCity;
   @Column(name = "address_zip_code")
   private String addrZipcode;
-  @Column(name = "address_lat")
-  private String addrLat;
-  @Column(name = "address_long")
-  private String addrLng;
 
+
+   
   @OneToOne
   @JoinColumn(name = "user_id", nullable = false)
   private UserEntity user; // getId() -> table}
+
+
+  @OneToOne(mappedBy = "address", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private GeoEntity geo;
+
 }
