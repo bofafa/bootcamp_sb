@@ -1,0 +1,19 @@
+package com.bootcamp.demo_post.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.bootcamp.demo_post.entity.AddressEntity;
+import com.bootcamp.demo_post.entity.UserEntity;
+
+@Service
+public interface UserService {
+
+    List<UserEntity> getAllDataFromDatabase();
+
+    List<UserEntity> saveAll(List<UserEntity> userEntities);
+
+    List<AddressEntity> saveAlladdress(List<AddressEntity> addressEntity);
+
+}
