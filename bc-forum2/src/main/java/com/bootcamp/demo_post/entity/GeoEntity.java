@@ -1,5 +1,9 @@
 package com.bootcamp.demo_post.entity;
 
+
+import java.io.Serializable;
+
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,9 +24,10 @@ import lombok.Setter;
 @Getter
 @Entity
 @Table(name = "geo")
-public class GeoEntity {
+public class GeoEntity implements Serializable  {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column (name = "geo_id")
   private Integer id;
   private String lat;
   private String lng;

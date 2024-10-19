@@ -18,9 +18,9 @@ public class User{
   private String email;
   private String website;
   private Company company;
-  private Integer addressId;
-  private Integer companyId;
-  private Integer GeoId;
+ // private Integer addressId;
+ // private Integer companyId;
+ // private Integer GeoId;
 
 
 
@@ -32,7 +32,7 @@ public class User{
     private String city;
     private String zipcode;
     private Geo geo;
-    private Integer geoId;
+    //private Integer geoId;
 
     @Getter
     @Builder
