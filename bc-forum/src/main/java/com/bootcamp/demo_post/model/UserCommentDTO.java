@@ -22,7 +22,7 @@ public class UserCommentDTO {
   @Data
   @Builder
   public static class CommentDTO {
-   // private Integer id;
+    private Integer id;
     private String name;
     private String email;
     private String body;

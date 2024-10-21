@@ -22,8 +22,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Setter
 public class UserEntity  implements Serializable{
- @Id
- @GeneratedValue (strategy = GenerationType.IDENTITY)
+ @Id //Primary Key
+ @GeneratedValue (strategy = GenerationType.IDENTITY)  //IDENTIT, MSSQL auto−increment
 
   private Integer id;
   private String name;

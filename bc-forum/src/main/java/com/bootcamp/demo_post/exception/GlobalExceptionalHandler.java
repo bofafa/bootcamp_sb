@@ -12,11 +12,11 @@ import org.springframework.web.client.RestClientException;
 @RestControllerAdvice
 public class GlobalExceptionalHandler {
   
-  @ExceptionHandler ({RestClientException.class})    // springboot class
-  @ResponseStatus(value = HttpStatus.BAD_REQUEST)
+  @ExceptionHandler ({RestClientException.class})    // RestClientException -> springboot class
+  @ResponseStatus(value = HttpStatus.BAD_REQUEST)    //開新class ErrorResponse for exception 要有乜， 有code + message), BAD_REQUEST -> type of error
     public ErrorResponse handlerestClientExceptionHandler() {
     return ErrorResponse.builder()           
-   .code(ErrorCode.BAD_REQUEST.getCode())
+   .code(ErrorCode.BAD_REQUEST.getCode())           // dot 返enum 出嚟
    .message(ErrorCode.BAD_REQUEST.getMessage())
    .build();
   }
@@ -34,7 +34,7 @@ public class GlobalExceptionalHandler {
 
   @ExceptionHandler(UserNotFoundException.class)      //自己寫嘅 user not found exception class
   @ResponseStatus(value = HttpStatus.NOT_FOUND)
-  public ErrorResponse handleUserNotFoundException(){        // 開error Response 俾exception
+  public ErrorResponse handleUserNotFoundException(){        
     return ErrorResponse.builder()                            // return 返俾error Response，用builder pattern 裝reponse
   .code(ErrorCode.USER_NOT_FOUND.getCode())
   .message(ErrorCode.USER_NOT_FOUND.getMessage())
@@ -43,7 +43,7 @@ public class GlobalExceptionalHandler {
 
   @ExceptionHandler(NumberFormatException.class)       //最底層Run time error: NumberFormatException
   @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
-  public ErrorResponse handleInvalidInputException() {    // 用自己嘅包裝，number format error
+  public ErrorResponse handleInvalidInputException() {    // 用自己嘅包裝 handleInvalidInputException，number format error
       return ErrorResponse.builder()
       .code(ErrorCode.INVALID_INPUT.getCode())
       .message(ErrorCode.INVALID_INPUT.getMessage())

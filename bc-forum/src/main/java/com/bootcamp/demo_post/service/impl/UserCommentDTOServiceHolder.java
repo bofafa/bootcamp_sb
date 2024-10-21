@@ -67,7 +67,7 @@ public class UserCommentDTOServiceHolder implements UserCommentDTOService {
     
     // Collect all comments from all posts using stream
     List<UserCommentDTO.CommentDTO> insideList = targetUser.getPostDTO().stream()
-        .flatMap(post -> post.getCommentDTO().stream())  // Flatten the comments from all posts
+        .flatMap(post -> post.getCommentDTO().stream())  // Flatten the comments from all posts 
         .map(comment -> userPostCommentMapper.map(comment))  // Map each comment to UserCommentDTO.CommentDTO
         .collect(Collectors.toList());
     
@@ -81,10 +81,8 @@ public class UserCommentDTOServiceHolder implements UserCommentDTOService {
 }
 
 
-
-
-// [[1,2,3],[4,5,6]] -> map -> [[1,2,3,4,5,6]]
 // [[1,2,3],[4,5,6]] -> flatmap -> [1,2,3,4,5,6]
+// [[1,2,3],[4,5,6]] -> map -> [[1,2,3,4,5,6]]
 
 
     // List<UserCommentDTO.CommentDTO> insideList = new ArrayList<>();

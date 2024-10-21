@@ -19,7 +19,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Entity
 @Table(name = "posts")
 @Getter
@@ -27,19 +26,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class PostEntity  implements Serializable{
- @Id
- @GeneratedValue (strategy = GenerationType.IDENTITY)
- @Column(name = "post_id")
+public class PostEntity implements Serializable {
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "post_id")
   private Integer id;
-   @Column(name = "post_topic")
+  @Column(name = "post_topic")
   private String title;
   @Column(name = "post_body")
   private String body;
 
-
   @Builder.Default
-  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL,
-      fetch = FetchType.LAZY)
+  @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private List<CommentEntity> comments = new ArrayList<>();
 }

@@ -51,7 +51,7 @@ public class JPHCommentMapper {
 
   public PostEntity map(Post post) {
     return PostEntity.builder() 
-        .userId(post.getUserId())
+        //.userId(post.getUserId())
        .id(post.getId())
        .title(post.getTitle())
        .body(post.getBody())
@@ -60,7 +60,7 @@ public class JPHCommentMapper {
 
   public CommentEntity map(Comment comment) {
     return CommentEntity.builder() 
-    .postId(comment.getPostId())
+    //.postId(comment.getPostId())
     .id(comment.getId())
     .name(comment.getName())
     .email(comment.getEmail())

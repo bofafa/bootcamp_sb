@@ -53,9 +53,9 @@ public class UserPostCommentDTOServiceHolder implements UserPostCommentDTOServic
 
     // Create UserPostCommentDTO list
     List<UserPostCommentDTO> userPostCommentDTOList = userList.stream().map(user -> {
-    
+  
       List<PostDTO> postDTOs = postList.stream()
-          .filter(post -> post.getUserId().equals(user.getId()))
+          .filter(post -> post.getUserId().equals(user.getId()))  //對ID, 同名放入List
           .map(post -> {
             List<UserPostCommentDTO.CommentDTO> commentDTOs = commentList.stream()//
                 .filter(comment -> comment.getPostId().equals(post.getUserId()))//
@@ -71,8 +71,6 @@ public class UserPostCommentDTOServiceHolder implements UserPostCommentDTOServic
 
       // Map user details and add posts
       UserPostCommentDTO userPostCommentDTO = userPostCommentMapper.mapToDTO(user);
-      // userPostCommentDTO.setAddress(null);
-      // userPostCommentDTO.setCompany(null);
       userPostCommentDTO.setPostDTO(postDTOs);
 
       return userPostCommentDTO;

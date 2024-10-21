@@ -6,5 +6,8 @@ import com.bootcamp.demo_post.entity.PostEntity;
 
 public interface PostService {
   List<PostEntity> saveAll(List<PostEntity> postEntities);
+
+  List<PostEntity> findPostByTitle(String title);
+
 }
 

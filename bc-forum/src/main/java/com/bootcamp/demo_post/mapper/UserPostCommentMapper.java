@@ -32,7 +32,7 @@ public class UserPostCommentMapper {
 
   public PostEntity map(Post post) {
     return PostEntity.builder()//
-        .userId(post.getUserId())//
+        //.userId(post.getUserId())//
         .id(post.getId())//
         .title(post.getTitle())//
         .body(post.getBody())//

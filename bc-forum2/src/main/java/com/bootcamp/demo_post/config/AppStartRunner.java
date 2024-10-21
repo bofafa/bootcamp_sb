@@ -45,6 +45,7 @@ public class AppStartRunner implements CommandLineRunner {
     List<AddressEntity> addressEntitys = this.jphCommentService.getAddressEntity();
     List<CompanyEntity> companyEntitys = this.jphCommentService.getCompanyEntity();
     List<GeoEntity> geoEntitys = this.jphCommentService.getGeoEntity();
+  
 
     List<UserEntity> userEntities = users.stream().map(uDto -> {
       UserEntity userEntity = UserEntity.builder()

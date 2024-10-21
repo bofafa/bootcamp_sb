@@ -1,12 +1,17 @@
 package com.bootcamp.demo_post.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +21,7 @@ import lombok.Setter;
 
 
 @Entity
-@Table(name = "post")
+@Table(name = "posts")
 @Getter
 @Builder
 @AllArgsConstructor
@@ -25,7 +30,7 @@ import lombok.Setter;
 public class PostEntity  implements Serializable{
  @Id
  @GeneratedValue (strategy = GenerationType.IDENTITY)
-  private Integer userId;
+  //private Integer userId;
   private Integer id;
    @Column(name = "post_topic")
   private String title;

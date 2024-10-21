@@ -21,7 +21,7 @@ public class UserPostCommentDTO {
   String website;
   CompanyDTO company;
 
-  @Builder.Default
+  @Builder.Default      //要new 嘢入去個list 要用  @Builder.Default   
   List<PostDTO> postDTO = new ArrayList<>();
 
   @Getter
@@ -59,7 +59,7 @@ public class UserPostCommentDTO {
     private String title;
     private String body;
 
-    @Builder.Default
+    @Builder.Default    
     private List<CommentDTO> commentDTO = new ArrayList<>();
 
   }
