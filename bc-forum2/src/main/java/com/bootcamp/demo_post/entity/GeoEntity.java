@@ -35,6 +35,6 @@ public class GeoEntity implements Serializable {
 
   @JsonIgnore
   @OneToOne
-  @JoinColumn(name = "address_id", nullable = false)
+  @JoinColumn(name = "address_id")
   private AddressEntity address; // getId() -> table}
 }
