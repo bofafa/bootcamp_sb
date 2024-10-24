@@ -1,5 +1,8 @@
 package com.bootcamp.demo_post.entity;
+
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,14 +20,14 @@ import lombok.Setter;
 
 @Builder
 @Entity
-@Table(name ="company")
+@Table(name = "company")
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
-public class CompanyEntity implements Serializable{
-  @Id   //Primary Key
-  @GeneratedValue (strategy = GenerationType.IDENTITY) 
+public class CompanyEntity implements Serializable {
+  @Id // Primary Key
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "company_id")
   private Integer id;
   private String name;
@@ -32,9 +35,9 @@ public class CompanyEntity implements Serializable{
   private String catchPhrase;
   private String bs;
 
-   @OneToOne
+  @JsonIgnore
+  @OneToOne
   @JoinColumn(name = "user_id", nullable = false)
   private UserEntity user; // getId() -> table}
 
 }
-

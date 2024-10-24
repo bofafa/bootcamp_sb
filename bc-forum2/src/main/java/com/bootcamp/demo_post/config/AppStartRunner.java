@@ -45,7 +45,7 @@ public class AppStartRunner implements CommandLineRunner {
     List<AddressEntity> addressEntitys = this.jphCommentService.getAddressEntity();
     List<CompanyEntity> companyEntitys = this.jphCommentService.getCompanyEntity();
     List<GeoEntity> geoEntitys = this.jphCommentService.getGeoEntity();
-  
+    List<PostEntity> postEntitys = this.jphCommentService.getPostEntity();
 
     List<UserEntity> userEntities = users.stream().map(uDto -> {
       UserEntity userEntity = UserEntity.builder()
@@ -60,11 +60,20 @@ public class AppStartRunner implements CommandLineRunner {
       return userEntity;
     }).collect(Collectors.toList());
 
+    userService.saveAll(userEntities);
+
     List<PostEntity> postEntities = posts.stream().map(pDto -> {
+
       PostEntity postEntity = PostEntity.builder() //
           .title(pDto.getTitle()) //
           .body(pDto.getBody()) //
           .build();
+
+      userEntities.forEach(user -> {
+        if (user.getId().equals(pDto.getUserId()))
+          postEntity.setUser(user);
+      });
+
       List<CommentEntity> commentEntities = comments.stream() //
           .filter(cDto -> cDto.getPostId().equals(pDto.getId())) //
           .map(cDto -> {
@@ -83,7 +92,7 @@ public class AppStartRunner implements CommandLineRunner {
 
     // Insert into Posts, Comments
     postService.saveAll(postEntities);
-    userService.saveAll(userEntities);
+    // userService.saveAll(userEntities);
 
     addressEntitys.forEach(address -> {
       userEntities.forEach(user -> {
@@ -104,7 +113,6 @@ public class AppStartRunner implements CommandLineRunner {
       });
     });
 
-
     companyEntitys.forEach(company -> {
       userEntities.forEach(user -> {
         if (company.getId().equals(user.getId())) {
@@ -118,7 +126,9 @@ public class AppStartRunner implements CommandLineRunner {
 
     userService.saveAllGeos(geoEntitys);
 
-    userService.saveAlladdress(addressEntitys);
+    // userService.saveAlladdress(addressEntitys);
+
+    postService.saveAll(postEntities);
 
   }
 }

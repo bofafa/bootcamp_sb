@@ -2,6 +2,8 @@ package com.bootcamp.demo_post.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,7 +36,7 @@ public class CommentEntity  implements Serializable {
   private String body;
 
 
- 
+   @JsonIgnore
   @ManyToOne
   @JoinColumn(name = "post_id", nullable = false)
   private PostEntity post;

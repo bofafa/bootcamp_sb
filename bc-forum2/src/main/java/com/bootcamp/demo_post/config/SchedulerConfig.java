@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 
 // @Slf4j
 // @Configuration
-@Component
+// @Component
 public class SchedulerConfig {
 
   //!Afer task compeleted, count 6 seconds
-  @Scheduled(fixedDelay = 6000)
+  // @Scheduled(fixedDelay = 6000)
   public void sayHello() throws Exception{ 
     System.out.println("Task A start, time = " + System.currentTimeMillis());
     Thread.sleep(4000);
@@ -20,7 +20,7 @@ public class SchedulerConfig {
   }
 
   //! every 3 second to exceute
-  @Scheduled(fixedRate = 5000)
+  // @Scheduled(fixedRate = 5000)
   public void sayBye() throws Exception{
     System.out.println("Task B start, time = " + System.currentTimeMillis());
     Thread.sleep(3000);

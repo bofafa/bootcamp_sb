@@ -22,4 +22,5 @@ public interface UserService {
   
    List<CompanyEntity> saveAllcompany(List<CompanyEntity> companyEntities);
   
+   List<UserEntity> getUserByID(Integer userID);
 }

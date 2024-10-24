@@ -2,6 +2,8 @@ package com.bootcamp.demo_post.entity;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -43,7 +45,7 @@ public class AddressEntity implements Serializable {
   private String addrZipcode;
 
 
-   
+   @JsonIgnore
   @OneToOne
   @JoinColumn(name = "user_id", nullable = false)
   private UserEntity user; // getId() -> table}

@@ -18,8 +18,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
-@Entity
-@Table(name = "user_post_comment")
+// @Entity
+// @Table(name = "user_post_comment")
 @Getter
 @Builder
 @AllArgsConstructor

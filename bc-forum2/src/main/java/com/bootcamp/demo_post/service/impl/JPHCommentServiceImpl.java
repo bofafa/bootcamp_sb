@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 import com.bootcamp.demo_post.entity.AddressEntity;
 import com.bootcamp.demo_post.entity.CompanyEntity;
 import com.bootcamp.demo_post.entity.GeoEntity;
+import com.bootcamp.demo_post.entity.PostEntity;
 import com.bootcamp.demo_post.exception.ErrorCode;
 import com.bootcamp.demo_post.exception.JPHRestClientException;
 import com.bootcamp.demo_post.mapper.JPHCommentMapper;
@@ -164,15 +165,17 @@ public class JPHCommentServiceImpl implements JPHCommentService {
         .collect(Collectors.toList());
   }
 
+  @Override
+  public List<PostEntity> getPostEntity() {
+    return getPost().stream().map(post -> {
+      PostEntity postEntity = PostEntity.builder()//
+          .id(post.getId())
+          .title(post.getTitle())
+          .body(post.getBody())
+          .build();
+      return postEntity;
+    })//
+        .collect(Collectors.toList());
+  }
  
-
-  // @Override
-  // public List<CompanyDTO> getCompanyDTO() {
-  //   return null;
-  // }
-
-
-
-  // getUserPostCommentDTO
-
 }

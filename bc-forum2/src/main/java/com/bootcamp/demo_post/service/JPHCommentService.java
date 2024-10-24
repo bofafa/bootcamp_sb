@@ -5,6 +5,7 @@ import java.util.List;
 import com.bootcamp.demo_post.entity.AddressEntity;
 import com.bootcamp.demo_post.entity.CompanyEntity;
 import com.bootcamp.demo_post.entity.GeoEntity;
+import com.bootcamp.demo_post.entity.PostEntity;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
@@ -23,6 +24,7 @@ List<Comment> getComment();
 List<AddressEntity> getAddressEntity();
 List<CompanyEntity> getCompanyEntity();
 List<GeoEntity> getGeoEntity();
+List<PostEntity> getPostEntity();
 
 
 }

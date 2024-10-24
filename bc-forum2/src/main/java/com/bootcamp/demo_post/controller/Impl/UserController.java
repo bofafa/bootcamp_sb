@@ -29,4 +29,9 @@ public class UserController implements UserOperation {
         .name(userEntity.getName())//
         .build();
   }
+
+  @Override
+  public List<UserEntity> getUserByID(String userID) {
+    return userService.getUserByID(Integer.parseInt(userID));
+  }
 }

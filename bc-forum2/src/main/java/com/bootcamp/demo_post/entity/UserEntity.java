@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -19,6 +21,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Builder
 @Entity
@@ -27,6 +30,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
+@ToString
 public class UserEntity implements Serializable {
   @Id // Primary Key
   @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTIT, MSSQL auto−increment
@@ -45,5 +49,7 @@ public class UserEntity implements Serializable {
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private CompanyEntity company;
 
-
+  @Builder.Default
+  @OneToMany (mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  private List<PostEntity> posts = new ArrayList<>();
 }
