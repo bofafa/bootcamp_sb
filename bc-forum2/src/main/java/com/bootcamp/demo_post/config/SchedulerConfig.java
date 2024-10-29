@@ -11,19 +11,20 @@ import org.springframework.stereotype.Component;
 // @Component
 public class SchedulerConfig {
 
-  //!Afer task compeleted, count 6 seconds
-  // @Scheduled(fixedDelay = 6000)
-  public void sayHello() throws Exception{ 
-    System.out.println("Task A start, time = " + System.currentTimeMillis());
+
+  // ! After task completed, count 6 seconds ...
+  // @Scheduled(fixedDelay = 60000)
+  public void sayHello() throws Exception {
+    System.out.println("Task A Starts. time=" + System.currentTimeMillis());
     Thread.sleep(4000);
-    System.out.println("Task A end, time = " + System.currentTimeMillis());
+    System.out.println("Task A Ends. time=" + System.currentTimeMillis());
   }
 
-  //! every 3 second to exceute
-  // @Scheduled(fixedRate = 5000)
-  public void sayBye() throws Exception{
-    System.out.println("Task B start, time = " + System.currentTimeMillis());
-    Thread.sleep(3000);
-    System.out.println("Task B end, time = " + System.currentTimeMillis());
+  // ! Every 3 seconds to exceute
+  // @Scheduled(fixedRate = 3000)
+  public void sayBye() throws Exception {
+    System.out.println("Task B Starts. time=" + System.currentTimeMillis());
+    Thread.sleep(2000);
+    System.out.println("Task B Ends. time=" + System.currentTimeMillis());
   }
 }

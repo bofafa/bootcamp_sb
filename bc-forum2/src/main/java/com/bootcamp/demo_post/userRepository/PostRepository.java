@@ -11,4 +11,8 @@ import com.bootcamp.demo_post.entity.PostEntity;
 public interface PostRepository extends JpaRepository<PostEntity, Integer> {
 @Query (value = "SELECT p FROM PostEntity p WHERE p.title =:title")
 List<PostEntity> findPostEntity(@Param ("title") String title);
+
+
+
+
 }

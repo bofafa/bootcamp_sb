@@ -8,6 +8,7 @@ import com.bootcamp.demo_post.entity.PostEntity;
 import com.bootcamp.demo_post.model.Comment;
 import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 public interface PostControllerOperation {
 
@@ -22,9 +23,13 @@ public interface PostControllerOperation {
 
 
   @GetMapping("/jph/posts")
-  List<Post> getPost();
+  List<Post> getPost() throws JsonProcessingException;
 
 
   @GetMapping("/jph/comments")
   List<Comment> getComment();
+
+
+  @GetMapping ("/jph/posts2")
+   List<Post> getAll() throws JsonProcessingException;
 }

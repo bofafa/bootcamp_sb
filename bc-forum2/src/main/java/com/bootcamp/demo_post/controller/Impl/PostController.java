@@ -15,6 +15,7 @@ import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.service.JPHCommentService;
 import com.bootcamp.demo_post.service.PostService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 import jakarta.persistence.EntityNotFoundException;
 
@@ -33,9 +34,15 @@ public  List<User> getUser(){
 }
 
 @Override
-public  List<Post> getPost(){
+public  List<Post> getPost()throws JsonProcessingException{
     return this.jphCommentService.getPost();
 }
+
+@Override
+public  List<Post> getAll()throws JsonProcessingException{
+    return this.jphCommentService.getAll();
+}
+
 
 @Override
 public List <Comment> getComment(){
@@ -52,4 +59,6 @@ public List<PostEntity> findPostByTitle(@PathVariable String title) {
         throw new EntityNotFoundException("Post with title '" + title + "' not found");
     }
   }
+
+
 }

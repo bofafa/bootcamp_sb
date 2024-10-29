@@ -43,7 +43,9 @@ public class UserEntity implements Serializable {
   private String email;
  
 
-  @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+  // All -> Remove + Persist + Merge, do not use CascadeType all, if delect one 
+  @OneToOne(mappedBy = "user",
+   cascade = CascadeType.ALL, fetch = FetchType.LAZY)
   private AddressEntity address;
 
   @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

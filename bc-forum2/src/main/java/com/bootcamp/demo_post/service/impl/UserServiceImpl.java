@@ -1,23 +1,30 @@
 package com.bootcamp.demo_post.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.hibernate.mapping.Array;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import com.bootcamp.demo_post.entity.AddressEntity;
 import com.bootcamp.demo_post.entity.CompanyEntity;
 import com.bootcamp.demo_post.entity.GeoEntity;
 import com.bootcamp.demo_post.entity.UserEntity;
+import com.bootcamp.demo_post.model.Post;
 import com.bootcamp.demo_post.service.UserService;
 import com.bootcamp.demo_post.userRepository.AddressRepository;
 import com.bootcamp.demo_post.userRepository.CompanyRepository;
 import com.bootcamp.demo_post.userRepository.GeoRepository;
 import com.bootcamp.demo_post.userRepository.UserRepository;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class UserServiceImpl implements UserService {
+ 
   @Autowired
   private UserRepository userRepository;
 
@@ -63,5 +70,4 @@ public class UserServiceImpl implements UserService {
 
         
   }
-
-}
+  }

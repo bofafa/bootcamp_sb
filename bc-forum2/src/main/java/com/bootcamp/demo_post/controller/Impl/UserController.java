@@ -10,6 +10,7 @@ import com.bootcamp.demo_post.controller.UserOperation;
 import com.bootcamp.demo_post.entity.UserEntity;
 import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.service.UserService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
 @RestController
 public class UserController implements UserOperation {
@@ -17,10 +18,11 @@ public class UserController implements UserOperation {
   @Autowired
   private UserService userService;
 
-  public List<User> getAllDataFromDatabase() {
+  public List<User> getAllDataFromDatabase() throws JsonProcessingException {
     return userService.getAllDataFromDatabase().stream()//
         .map(user -> this.map(user))//
         .collect(Collectors.toList());
+       
   }
 
   private User map(UserEntity userEntity) {

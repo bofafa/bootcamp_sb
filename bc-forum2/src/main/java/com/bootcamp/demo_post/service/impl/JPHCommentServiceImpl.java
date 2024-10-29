@@ -1,11 +1,14 @@
 package com.bootcamp.demo_post.service.impl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
@@ -24,9 +27,12 @@ import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.model.UserPostCommentDTO.AddressDTO.GeoDTO;
 import com.bootcamp.demo_post.model.UserPostCommentDTO.CompanyDTO;
 import com.bootcamp.demo_post.service.JPHCommentService;
+import com.bootcamp.demo_post.userRepository.PostRepository;
 // import com.bootcamp.demo_post.userRepository.UserRepository;
 import com.bootcamp.demo_post.util.Scheme;
 import com.bootcamp.demo_post.util.Url;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class JPHCommentServiceImpl implements JPHCommentService {
@@ -34,11 +40,20 @@ public class JPHCommentServiceImpl implements JPHCommentService {
   @Qualifier(value = "JPHRestTemplate")
   private RestTemplate restTemplate;
 
-  // @Autowired
-  // private UserRepository userRepository;
+  @Autowired
+  private PostRepository postRepository;
+
+  @Autowired
+  JPHCommentMapper mapper;
 
   @Autowired
   private JPHCommentMapper jphCommentMapper;
+
+  @Autowired
+  private  ObjectMapper objectMapper;
+
+  @Autowired
+  private RedisTemplate redisTemplate;
 
   @Value("${api.jph.domain}")
   private String jphDomain;
@@ -52,24 +67,7 @@ public class JPHCommentServiceImpl implements JPHCommentService {
   @Value("${api.jph.endpoints.comments}")
   private String commentsEndpoint;
 
-  // @Override
-  // public List<UserPostCommentDTO> getUserPostComment() {
-  // String url= Url.builder()
-  // .scheme(Scheme.HTTPS)
-  // .domain(this.jphDomain)
-  // .endpoint(this.usersEndpoint)
-  // .build()
-  // .toUriString();
-  // System.out.println("url=" + url);
-  // user[] users;
-  // try{
-  // users = this.restTemplate.getForObject(url,user[].class);
-  // } catch(RestClientException e){
-  // throw new JPHRestClientException("joson Placeholder exception.");
-  // }
-  // return List.of(userPostComment);
-  // }
-
+  
   @Override
   public List<User> getUser() {
     String url = Url.builder()
@@ -178,4 +176,28 @@ public class JPHCommentServiceImpl implements JPHCommentService {
         .collect(Collectors.toList());
   }
  
+ @Override
+  public List<Post> getAll() throws JsonProcessingException {
+    // if redis key exists, get the value (json string)
+    String json =(String) this.redisTemplate.opsForValue().get("jph-posts");
+    if (json == null) {
+      System.out.println("Redis not found.");
+      // read from DB
+      List<PostEntity> postEntities = postRepository.findAll();
+      List<Post> posts = postEntities.stream() //
+          .map(e -> mapper.map(e)) //
+          .collect(Collectors.toList());
+      // write to Redis ...
+      String dbJsonString = this.objectMapper.writeValueAsString(posts);
+      this.redisTemplate.opsForValue().set("jph-posts", dbJsonString);
+      return posts;
+    }
+    return Arrays.asList(this.objectMapper.readValue(json, PostEntity[].class))
+        .stream() //
+        .map(e -> mapper.map(e)) //
+        .collect(Collectors.toList());
+  }
+
+
+  
 }

@@ -46,5 +46,12 @@ public class JPHCommentMapper {
     .body(comment.getBody())
        .build();
   }
-}
 
+  public Post map(PostEntity postEntity) {
+    return Post.builder() //
+        .id(postEntity.getId()) //
+        .title(postEntity.getTitle()) //
+        .body(postEntity.getBody()) //
+        .build();
+}
+}

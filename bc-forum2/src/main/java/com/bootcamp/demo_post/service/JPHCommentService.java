@@ -12,6 +12,7 @@ import com.bootcamp.demo_post.model.User;
 import com.bootcamp.demo_post.model.User.Address;
 import com.bootcamp.demo_post.model.UserPostCommentDTO.AddressDTO;
 import com.bootcamp.demo_post.model.UserPostCommentDTO.CompanyDTO;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.bootcamp.demo_post.model.UserPostCommentDTO.AddressDTO.GeoDTO;
 import com.bootcamp.demo_post.model.UserPostCommentDTO;
 
@@ -25,6 +26,6 @@ List<AddressEntity> getAddressEntity();
 List<CompanyEntity> getCompanyEntity();
 List<GeoEntity> getGeoEntity();
 List<PostEntity> getPostEntity();
-
+List<Post> getAll() throws JsonProcessingException; 
 
 }
