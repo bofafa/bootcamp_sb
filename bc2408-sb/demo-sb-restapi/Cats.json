@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Vincent",
+    "age": 13,
+    "eyes": [
+      {
+        "color": "RED"
+      },
+      {
+        "color": "RED"
+      }
+    ],
+    "tail": {
+      "length": 13.0
+    }
+  },
+  {
+    "name": "Peter",
+    "age": 10,
+    "eyes": [
+      {
+        "color": "BLUE"
+      },
+      {
+        "color": "BLUE"
+      }
+    ],
+    "tail": {
+      "length": 8.0
+    }
+  }
+]
