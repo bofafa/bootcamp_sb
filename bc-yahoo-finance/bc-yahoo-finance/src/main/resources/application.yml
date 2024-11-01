@@ -11,12 +11,5 @@ spring:
     password: "admin1234"
   jpa:
     show-sql: true
-    hibernate.ddl-auto: create
-
-# Custom variables
-api:
-  jph:
-    domain:  "finance.yahoo.com" 
-    endpoints:
-      pathA: "0388.HK/history/" 
- 
+    hibernate.ddl-auto: update
+    # Hibernate ddl auto (create, create-drop, validate, update, none)

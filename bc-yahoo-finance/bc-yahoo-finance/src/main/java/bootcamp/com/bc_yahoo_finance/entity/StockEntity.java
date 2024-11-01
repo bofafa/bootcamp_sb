@@ -16,14 +16,20 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class TStockEntity {
+public class StockEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   Long id;
   String symbol;
   
+
+
+
+
+
+  
   //只放 symbol 
-  public TStockEntity(String symbol){
+  public StockEntity(String symbol){
     this.symbol=symbol;
   }
 }
