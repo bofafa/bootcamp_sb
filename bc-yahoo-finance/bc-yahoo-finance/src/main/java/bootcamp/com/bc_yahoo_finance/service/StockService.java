@@ -5,7 +5,9 @@ import java.util.List;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import bootcamp.com.bc_yahoo_finance.entity.StockEntity;
+import bootcamp.com.bc_yahoo_finance.entity.StockPriceEntity;
 import bootcamp.com.bc_yahoo_finance.model.Stock;
+import bootcamp.com.bc_yahoo_finance.model.dto.StockPriceDTO;
 
 
 public interface StockService {
@@ -13,4 +15,7 @@ public interface StockService {
   List<StockEntity> findAll();
   List<Stock> findAllWithCache() throws JsonProcessingException;
   StockEntity findBySymbol(String Symbol);
+
+  String getMaxDay(String symbol);
+  public StockPriceDTO getFiveMinData(String symbol)  throws JsonProcessingException;
 }

@@ -47,6 +47,9 @@ public class StockPriceEntity implements Serializable {
   @Column(name = "ask_size")
   private Long askSize;
 
+  //  private Long regularMarketTime;
+  //  private Long regularMarketDateTime;
+
   @ManyToOne
   @JoinColumn(name = "stock_id")
   private StockEntity stock;

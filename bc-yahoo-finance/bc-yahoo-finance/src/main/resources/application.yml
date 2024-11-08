@@ -1,18 +1,20 @@
-# # pre-defined variables
-# server:
-#   port: 8083
+# pre-defined variables
+server:
+  port: 8083
 
-# # pre-defined variables
-# spring:
-#   datasource:
-#     driverClassName: "org.postgresql.Driver"
-#     url: "jdbc:postgresql://127.0.0.1:5432/yahoo_finace"
-#     username: "postgres"
-#     password: "admin1234"
-#   jpa:
-#     show-sql: true
-#     hibernate.ddl-auto: update
-#     # Hibernate ddl auto (create, create-drop, validate, update, none)
+# pre-defined variables
+spring:
+  datasource:
+    driverClassName: "org.postgresql.Driver"
+    url: "jdbc:postgresql://127.0.0.1:5432/yahoo_finace"
+    username: "postgres"
+    password: "admin1234"
+  jpa:
+    show-sql: true
+    hibernate.ddl-auto: create-drop
+    # Hibernate ddl auto (create, create-drop, validate, update, none)
+
+    
 # server:
 #   port: 8083
 
@@ -31,18 +33,18 @@
 #       host: redisserver # Use the service name 'redisserver' here
 #       port: 6379
 
-spring:
-  datasource:
-    driverClassName: "org.postgresql.Driver"
-    url: "jdbc:postgresql://postgres:5432/yahoo_finace" # Use the service name 'postgres' here
-    username: "postgres"
-    password: "admin1234"
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: update
-      dialect: org.hibernate.dialect.PostgreSQLDialect # Specify the PostgreSQL dialect here
-  data:
-    redis:
-      host: redisserver # Use the service name 'redisserver' here
-      port: 6379
+# spring:
+#   datasource:
+#     driverClassName: "org.postgresql.Driver"
+#     url: "jdbc:postgresql://postgres:5432/yahoo_finace" # Use the service name 'postgres' here
+#     username: "postgres"
+#     password: "admin1234"
+#   jpa:
+#     show-sql: true
+#     hibernate:
+#       ddl-auto: update
+#       dialect: org.hibernate.dialect.PostgreSQLDialect # Specify the PostgreSQL dialect here
+#   data:
+#     redis:
+#       host: redisserver # Use the service name 'redisserver' here
+#       port: 6379

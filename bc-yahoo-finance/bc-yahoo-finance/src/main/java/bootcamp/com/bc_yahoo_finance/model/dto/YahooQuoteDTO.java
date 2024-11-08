@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -113,7 +114,9 @@ public class YahooQuoteDTO {
         private String averageAnalystRating;
         private boolean tradeable;
         private boolean cryptoTradeable;
-        private String symbol;
+       
+    private String symbol;
+
       }
 
  

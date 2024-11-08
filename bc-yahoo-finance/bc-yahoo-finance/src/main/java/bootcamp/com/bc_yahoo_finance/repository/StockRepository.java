@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import bootcamp.com.bc_yahoo_finance.entity.StockEntity;
 
 @Repository
-public interface StockRepository extends JpaRepository<StockEntity, Long>{
-  Optional <StockEntity> findBySymbol (String symbol);
-  
+public interface StockRepository extends JpaRepository<StockEntity, Long> {
+  Optional<StockEntity> findBySymbol(String symbol);
 }
