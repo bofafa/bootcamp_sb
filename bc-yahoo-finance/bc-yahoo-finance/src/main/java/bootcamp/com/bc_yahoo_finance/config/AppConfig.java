@@ -8,31 +8,34 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.stereotype.Component;
 import org.springframework.data.redis.serializer.GenericJackson2JsonRedisSerializer;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-import bootcamp.com.bc_yahoo_finance.entity.StockPriceEntity;
+import bootcamp.com.bc_yahoo_finance.entity.TransactionEntity;
+import bootcamp.com.bc_yahoo_finance.infra.web.RedisHelper;
 import bootcamp.com.bc_yahoo_finance.infra.yahoo.YHRestClient;
+
+
 @Configuration
 public class AppConfig {
   @Bean
   YHRestClient yahooRestClient() {
     return new YHRestClient();
   }
-  
+
   @Bean
   ObjectMapper objectMapper() {
-    return new ObjectMapper();
+    ObjectMapper mapper = new ObjectMapper();
+    mapper.registerModule(new JavaTimeModule());
+    mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+    return mapper;
   }
 
   @Bean
-  RedisTemplate<String, String> redisTemplate(RedisConnectionFactory factory) {
-    RedisTemplate<String, String> redisTemplate = new RedisTemplate<>();
-    redisTemplate.setConnectionFactory(factory);
-    redisTemplate.setKeySerializer(RedisSerializer.string());
-    redisTemplate.setValueSerializer(RedisSerializer.json());
-    redisTemplate.afterPropertiesSet();
-    return redisTemplate;
+  RedisHelper redisHelper(RedisConnectionFactory factory,
+      ObjectMapper objectMapper) {
+    return new RedisHelper(factory, objectMapper);
   }
 }

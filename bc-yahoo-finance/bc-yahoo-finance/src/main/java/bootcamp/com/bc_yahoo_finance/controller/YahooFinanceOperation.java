@@ -7,8 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import bootcamp.com.bc_yahoo_finance.entity.StockPriceEntity;
-import bootcamp.com.bc_yahoo_finance.model.dto.StockPriceDTO;
+import bootcamp.com.bc_yahoo_finance.entity.TransactionEntity;
 import bootcamp.com.bc_yahoo_finance.model.dto.YahooQuoteDTO;
 
 

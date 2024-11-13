@@ -37,5 +37,5 @@ public class StockEntity {
 
   @Builder.Default
   @OneToMany(mappedBy = "stock", cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
-  private List<StockPriceEntity> stockQuotes = new ArrayList<>();
+  private List<TransactionEntity> stockQuotes = new ArrayList<>();
 }

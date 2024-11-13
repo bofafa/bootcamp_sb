@@ -1,20 +1,47 @@
-# pre-defined variables
+# Common application settings
 server:
   port: 8083
 
-# pre-defined variables
 spring:
   datasource:
-    driverClassName: "org.postgresql.Driver"
+    driver-class-name: "org.postgresql.Driver"
     url: "jdbc:postgresql://127.0.0.1:5432/yahoo_finace"
     username: "postgres"
     password: "admin1234"
   jpa:
     show-sql: true
-    hibernate.ddl-auto: create-drop
-    # Hibernate ddl auto (create, create-drop, validate, update, none)
+    hibernate:
+      ddl-auto: update # Options: create, create-drop, validate, update, none
 
-    
+# Docker and EC2 specific profiles
+---
+spring:
+  config:
+    activate:
+      on-profile: docker,ec2
+
+  datasource:
+    driver-class-name: "org.postgresql.Driver"
+    url: jdbc:postgresql://0.0.0.0:5432/yahoo_finace
+    username: postgres
+    password: admin1234
+
+  jpa:
+    properties:
+      hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  data:
+    redis:
+      host: 0.0.0.0
+      port: 6379
+
+server:
+  port: 8083
+
+
 # server:
 #   port: 8083
 

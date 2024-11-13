@@ -1,4 +1,4 @@
-package bootcamp.com.bc_yahoo_finance.exception;
+package bootcamp.com.bc_yahoo_finance.infra.web;
 
 import java.io.IOException;
 
@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
+
+import bootcamp.com.bc_yahoo_finance.exception.ErrorCode;
+import bootcamp.com.bc_yahoo_finance.exception.ErrorResponse;
+import bootcamp.com.bc_yahoo_finance.exception.RestTemplateException;
 
 // @RestControllerAdvice
 public class GlobalExceptionalHandler {

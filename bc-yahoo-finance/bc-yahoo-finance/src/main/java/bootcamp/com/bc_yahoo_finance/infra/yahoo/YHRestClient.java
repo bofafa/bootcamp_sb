@@ -5,12 +5,10 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
 import org.apache.hc.client5.http.cookie.BasicCookieStore;
 import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
 import org.apache.hc.client5.http.impl.classic.HttpClients;
 import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +21,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import bootcamp.com.bc_yahoo_finance.exception.StockQuoteYahooException;
@@ -31,24 +28,23 @@ import bootcamp.com.bc_yahoo_finance.infra.web.UrlManager;
 import bootcamp.com.bc_yahoo_finance.model.dto.YahooQuoteDTO;
 import bootcamp.com.bc_yahoo_finance.model.dto.YahooQuoteErrorDTO;
 
-@Configuration
 public class YHRestClient {
-
   private static final String USER_AGENT_STRING = "Mozilla/5.0";
   private final Object lock = new Object();
 
   private RestTemplate restTemplate;
   private CrumbManager crumbManager;
-  private BasicCookieStore cookieStore; // BasicCookieStore from springboot
+  private BasicCookieStore cookieStore;
 
-  // create an HttpCilent with a custo cookie store
   public YHRestClient() {
+    // Create an HttpClient with a custom cookie store
     this.cookieStore = new BasicCookieStore();
-    CloseableHttpClient httpClient = HttpClients.custom()
-        .setDefaultCookieStore(this.cookieStore)
+    CloseableHttpClient httpClient = HttpClients.custom() //
+        .setDefaultCookieStore(this.cookieStore) //
         .build();
 
-    HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+    HttpComponentsClientHttpRequestFactory factory =
+        new HttpComponentsClientHttpRequestFactory();
     factory.setHttpClient(httpClient);
 
     List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>();
@@ -87,17 +83,15 @@ public class YHRestClient {
       String crumbKey = this.crumbManager.getCrumb();
       // System.out.println("crumb=" + crumbKey);
       url = url.concat(crumbKey);
-      System.out.println("url=" + url);
-      ResponseEntity<String> response = this.restTemplate.getForEntity(url, String.class);
+      // System.out.println("url=" + url);
+      ResponseEntity<String> response =
+          this.restTemplate.getForEntity(url, String.class);
       if (!response.getStatusCode().equals(HttpStatus.OK)) {
         YahooQuoteErrorDTO errorDto = new ObjectMapper()
             .readValue(response.getBody(), YahooQuoteErrorDTO.class);
         throw new StockQuoteYahooException(errorDto);
       }
-      ObjectMapper objectMapper = new ObjectMapper();
-      objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
-      return objectMapper.readValue(response.getBody(),
+      return new ObjectMapper().readValue(response.getBody(),
           YahooQuoteDTO.class);
     }
   }

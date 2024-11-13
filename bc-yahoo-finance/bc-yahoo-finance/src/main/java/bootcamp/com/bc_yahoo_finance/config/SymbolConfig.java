@@ -9,9 +9,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import bootcamp.com.bc_yahoo_finance.entity.StockEntity;
-import bootcamp.com.bc_yahoo_finance.entity.StockPriceEntity;
-import bootcamp.com.bc_yahoo_finance.repository.StockPriceRepository;
+import bootcamp.com.bc_yahoo_finance.entity.TransactionEntity;
+
 import bootcamp.com.bc_yahoo_finance.repository.StockRepository;
+import bootcamp.com.bc_yahoo_finance.repository.TransactionRepository;
 import bootcamp.com.bc_yahoo_finance.service.StockService;
 import bootcamp.com.bc_yahoo_finance.service.YahooFinanceService;
 
@@ -22,7 +23,7 @@ public class SymbolConfig implements CommandLineRunner {
   @Autowired
   private StockRepository stockRepository;
   @Autowired
-  private StockPriceRepository stockPriceRepository;
+  private TransactionRepository stockPriceRepository;
 
   /**
    * For System Design, there should be admin system for stock symbols setup. In
@@ -35,8 +36,8 @@ public class SymbolConfig implements CommandLineRunner {
   @Override
   public void run(String... args) {
     // ! Clear all Stock Symbols in DB. (jpa.hibernate.ddl-auto: update)
-    // For retrun process.
-    //this.stockPriceRepository.deleteAll();
+    // For rerun process.
+    this.stockPriceRepository.deleteAll();
     this.stockRepository.deleteAll();
 
     String[] symbols = new String[] {"0388.HK", "0700.HK", "0005.HK"};
@@ -45,7 +46,5 @@ public class SymbolConfig implements CommandLineRunner {
         .collect(Collectors.toList());
     stockService.saveAll(entities);
     System.out.println("Insert Stock Symbols Completed.");
-
-    System.out.println("6A getDate*********" + stockService.getMaxDay("0700.HK"));
   }
 }
